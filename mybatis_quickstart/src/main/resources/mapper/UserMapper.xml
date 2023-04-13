@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+    <!--namespace：命名空间：与id属性共同构成唯一标识 namespace.id  : user.findall
+    resultType:返回结果类型（自动映射封装）：要封装实体类的全路径
+    -->
+    <select id="findAll" resultType="User">
+        select * from user
+    </select>
+
+    <!--新增用户-->
+    <insert id="saveUser" parameterType="User">
+        insert into user(username,birthday,sex,address) value (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <!--更新-->
+    <update id="updateUser" parameterType="User">
+        update user set username=#{username},birthday = #{birthday},sex = #{sex},address = #{address} where id = #{id}
+    </update>
+
+    <!--删除-->
+    <!--delete from user where id=#{id}  这里的{}里面可以随便写-->
+    <!--mybateis给java.lang.Integer起了别名为int    起别名通过<typeAliases>实现的-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id=#{id}
+    </delete>
+</mapper>
